@@ -19,8 +19,9 @@ nav {
 .current {
     color: green;
 }
-Pre,code {
+pre,code {
     font-family: 'Nanum Gothic Coding'; 
+    word-wrap: break-word;
 }
 
 :root {

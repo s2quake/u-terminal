@@ -212,6 +212,7 @@
 pre.highlight {
   border: 0px;
   margin: 0px;
+  white-space: pre-wrap;
 }
 div.highlight {
   margin: 0px;
