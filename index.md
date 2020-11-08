@@ -7,29 +7,15 @@ title: Home
 
 # 소개
 
-u-Terminal 은 사용자의 입력을 받고 결과를 출력하는 REPL 환경을 제공합니다.
+u-Terminal 은 유닉스의 터미널, 윈도우의 콘솔, FPS 게임의 콘솔창처럼
 
-유닉스의 터미널, 윈도우의 콘솔, FPS 게임의 콘솔창 등의 환경을 유니티에서 사용하기 위해서 개발되었습니다.
+사용자의 입력을 받고 결과를 출력하는 REPL 환경을 제공합니다.
 
-* 유니티의 로그를 종류별로 출력하거나 특정 객체의 메소드를 호출할 수 있으며
+# 유니티 버전
 
-특정 객체의 필드 및 속성등을 열람할 수 있으며 값을 설정할 수도 있습니다.
+2018.4.27f1 and later
 
-비동기 작업을 통해서 복잡한 작업을 수행할 수 있습니다.
-
-이러한 작업들은 미리 정의된 명령어를 통해 수행할 수 있으며
-
-직접 명령어를 정의할 수도 있습니다.
-
-작성된 명령어는 간단한 설명을 추가하는 것만으로도 멋진 도움말이 자동으로 작성되므로
-
-다른 개발자들에게 쉽게 사용법을 공유할 수 있습니다.
-
-아래의 내용은 미리 정의된 명령어를 통해 실행할 수 있는 예제입니다.
-
-![dsf](./assets/images/config-command.gif){: width="700" height="438"}
-![dsf](./assets/images/restart-command.gif){: width="700" height="438"}
-![dsf](./assets/images/visible-controller.gif){: width="700" height="438"}
+# 사용 예제
 
 ```
 comp ls /GameObject
@@ -43,9 +29,15 @@ scene --list
 version
 ```
 
-아래는 exit 명령어의 정의 내용입니다.
+# 명령어 정의
+
+* 비동기 명령 지원
+* 하위 명령어 지원
+* 명령어 자동완성
+* 도움말 자동 생성
 
 ```cs
+[CommandSummary("Exit the application.")]
 public class TestExitCommand : TerminalCommandBase
 {
     public TestExitCommand(ITerminal terminal)
@@ -54,6 +46,7 @@ public class TestExitCommand : TerminalCommandBase
     }
 
     [CommandPropertyRequired(DefaultValue = 0)]
+    [CommandSummary("Specifies the exit code. The default is 0.")]
     public int ExitCode { get; set; }
 
     protected override void OnExecute()
@@ -66,3 +59,44 @@ public class TestExitCommand : TerminalCommandBase
     }
 }
 ```
+
+![restart-command](./assets/images/restart-command.gif){: width="700" height="438"}
+
+
+# 속성 설정
+
+```cs
+public class TestConfiguration : MonoBehaviour
+{
+    [SerializeField]
+    private float value = 0;
+    [SerializeField]
+    private ConfigurationSystem configSystem = null;
+
+    private void Awake()
+    {
+        if (this.configSystem != null)
+        {
+            this.configSystem.AddConfig(new FieldConfiguration("test.value", this, nameof(value)) { DefaultValue = this.value });
+        }
+    }
+}
+```
+
+![config-command](./assets/images/config-command.gif){: width="700" height="438"}
+
+
+# show/hide terminal
+
+default key : ctrl + `
+
+![visible-controller](./assets/images/visible-controller.gif){: width="700" height="438"}
+
+
+# javascript
+
+*javascript content is not included in the asset.*
+
+The figure below is implemented using the [jint](https://github.com/sebastienros/jint) library.
+
+![visible-controller](./assets/images/javascript.gif){: width="700" height="438"}
