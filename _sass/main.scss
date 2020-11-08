@@ -4,8 +4,15 @@ html {
     font-family: 'Nanum Gothic Coding';
     background-color: black;
     color: white;
+    max-width: 700px;
+    margin: auto;
 }
-
+nav {
+    text-align: right;
+}
 .current {
     color: green;
+}
+Pre,code {
+    font-family: sudo; 
 }
