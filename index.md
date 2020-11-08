@@ -61,8 +61,7 @@ public class TestExitCommand : TerminalCommandBase
 }
 ```
 
-![restart-command](./assets/images/restart-command.gif){: width="700" height="438"}
-
+<img id="body-img" src="./assets/images/restart-command.gif" alt="restart-command" />
 
 # Configuration
 
@@ -84,15 +83,14 @@ public class TestConfiguration : MonoBehaviour
 }
 ```
 
-![config-command](./assets/images/config-command.gif){: width="700" height="438"}
+<img id="body-img" src="./assets/images/config-command.gif" alt="config-command" />
 
 
 # show/hide terminal
 
 default key : ctrl + `
 
-![visible-controller](./assets/images/visible-controller.gif){: width="700" height="438"}
-
+<img id="body-img" src="./assets/images/visible-controller.gif" alt="visible-controller" />
 
 # javascript
 
@@ -100,4 +98,4 @@ default key : ctrl + `
 
 The figure below is implemented using the [jint](https://github.com/sebastienros/jint) library.
 
-![visible-controller](./assets/images/javascript.gif){: width="700" height="438"}
+<img id="body-img" src="./assets/images/javascript.gif" alt="javascript" />
