@@ -3,19 +3,20 @@ layout: home
 permalink: /
 permalink_name: /home
 title: Home
+detail_image: assets/images/logo.png
 ---
 
-# 소개
+# Summary
 
-u-Terminal 은 유닉스의 터미널, 윈도우의 콘솔, FPS 게임의 콘솔창처럼
+u-Terminal is like a terminal in Unix, a console in Windows, and a console window in FPS games.
 
-사용자의 입력을 받고 결과를 출력하는 REPL 환경을 제공합니다.
+Provides a REPL environment for receiving user input and outputting results.
 
-# 유니티 버전
+# Unity Version
 
 2018.4.27f1 and later
 
-# 사용 예제
+# Usage
 
 ```
 comp ls /GameObject
@@ -29,12 +30,12 @@ scene --list
 version
 ```
 
-# 명령어 정의
+# Command
 
-* 비동기 명령 지원
-* 하위 명령어 지원
-* 명령어 자동완성
-* 도움말 자동 생성
+* Asynchronous command support
+* Subcommand support
+* Autocomplete command
+* Automatically generate help
 
 ```cs
 [CommandSummary("Exit the application.")]
@@ -63,7 +64,7 @@ public class TestExitCommand : TerminalCommandBase
 ![restart-command](./assets/images/restart-command.gif){: width="700" height="438"}
 
 
-# 속성 설정
+# Configuration
 
 ```cs
 public class TestConfiguration : MonoBehaviour
