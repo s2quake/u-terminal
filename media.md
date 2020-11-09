@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /preview
-permalink_name: /preview
-title: Preview
+permalink: /media
+permalink_name: /media
+title: Media
 ---
 
 # base usage

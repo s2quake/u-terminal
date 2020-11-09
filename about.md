@@ -13,9 +13,9 @@ title: About
 
 # Unity version
 
-2018.4.27f1
-2019.4.10f1
-2020.1.6f1
+2018.4.27f1 and later
+2019.4.10f1 and later
+2020.1.6f1 and later
 
 # site theme
 

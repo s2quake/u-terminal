@@ -7,12 +7,16 @@ html {
     max-width: 700px;
     margin: auto;
 }
+
 nav {
     text-align: right;
 }
+
 .current {
     color: green;
 }
-Pre,code {
-    font-family: sudo; 
+
+pre,
+code {
+    font-family: sudo;
 }

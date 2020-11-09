@@ -1,6 +1,8 @@
 {
     "files.exclude": {
-        "_site/": false,
+        "_site/": true,
         ".jekyll-cache/": true
-    }
+    },
+    "formate.alignColon": false,
+    "formate.verticalAlignProperties": false
 }

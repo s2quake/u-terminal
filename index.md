@@ -6,17 +6,19 @@ title: Home
 detail_image: assets/images/logo.png
 ---
 
-# Summary
+# /Summary
 
 u-Terminal is like a terminal in Unix, a console in Windows, and a console window in FPS games.
 
 Provides a REPL environment for receiving user input and outputting results.
 
-# Unity Version
+# /Unity Version
 
 2018.4.27f1 and later
+2019.4.10f1 and later
+2020.1.6f1 and later
 
-# Usage
+# /Example of use
 
 ```
 comp ls /GameObject
@@ -30,18 +32,25 @@ scene --list
 version
 ```
 
-# Command
+# /Features
 
 * Asynchronous command support
 * Subcommand support
 * Autocomplete command
 * Automatically generate help
+* Text color support
+* Mobile support(ios, android)
+* Various styles and palettes
+
+# /Example of Command Definition 
+
+Base command definition
 
 ```cs
 [CommandSummary("Exit the application.")]
-public class TestExitCommand : TerminalCommandBase
+public class ExitCommand : TerminalCommandBase
 {
-    public TestExitCommand(ITerminal terminal)
+    public ExitCommand(ITerminal terminal)
         : base(terminal)
     {
     }
@@ -61,9 +70,13 @@ public class TestExitCommand : TerminalCommandBase
 }
 ```
 
+Base usage
+
 <img id="body-img" src="./assets/images/restart-command.gif" alt="restart-command" />
 
-# Configuration
+# /Configuration
+
+Register field information to be used as configuration
 
 ```cs
 public class TestConfiguration : MonoBehaviour
@@ -83,16 +96,17 @@ public class TestConfiguration : MonoBehaviour
 }
 ```
 
+How to use configurations in a terminal
+
 <img id="body-img" src="./assets/images/config-command.gif" alt="config-command" />
 
-
-# show/hide terminal
+# /Slide in and out transition for terminal
 
 default key : ctrl + `
 
 <img id="body-img" src="./assets/images/visible-controller.gif" alt="visible-controller" />
 
-# javascript
+# /javascript
 
 *javascript content is not included in the asset.*
 
