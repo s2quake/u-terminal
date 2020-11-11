@@ -111,11 +111,11 @@ base-sub method3 value
 
 # /Property definitions
 
-## CommandPropertyAttribute
+## 1. CommandPropertyAttribute
 
 * The default format is '\-\-Property Value'
-* If a default value is specified, the value can be omitted. like '\-\-Property'
-* If no property is specified, the value can be specified as InitValue.
+* If **'DefaultValue'** of Attribute, the value can be omitted. However, the delimiter must be specified. like '\-\-Property'
+* All properties are set to their initial values. If you want to specify an initial value, specify **'InitValue'** of Attribute.
 
 ```cs
 [CommandProperty]
@@ -128,12 +128,40 @@ public string Value { get; set; }
 public string Value { get; set; }
 ```
 
-## CommandPropertyRequiredAttribute
+## 2. CommandPropertyRequiredAttribute
 
-* Specifies only values without delimiter
-* If a default value is specified, you can omit the value.
-* If the value of IsExplicit is specified as true, it must be specified in the form of "\-\-Property Value".
+* All properties specify only values without delimiters.
+* If **'DefaultValue'** of Attribute, the value can be omitted
+* If **'IsExplicit'** or Attribute is specified as true, you must specify a delimiter and a value. like '\-\-Property Value'.
 
-## CommandPropertySwitchAttribute
+```cs
+[CommandPropertyRequired]
+public string Value { get; set; }
 
-## CommandPropertyArrayAttribute
+[CommandPropertyRequired(DefaultValue = "text")]
+public string Value { get; set; }
+
+[CommandPropertyRequired(IsExplicit = true)]
+public string Value { get; set; }
+```
+
+## 3. CommandPropertySwitchAttribute
+
+* Only available for Boolean type properties.
+* If the delimiter is specified, the value of the property is true, otherwise the value is false.
+
+```cs
+[CommandPropertySwitch]
+public bool Value { get; set; }
+```
+
+## 4. CommandPropertyArrayAttribute
+
+* Only available for Array type properties.
+* All properties specify only values without delimiters.
+* CommandPropertyArrayAttribute cannot be multiple in one command.
+
+```cs
+[CommandPropertyArray]
+public string[] Values { get; set; }
+```
