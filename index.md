@@ -10,12 +10,14 @@ detail_image: assets/images/logo.png
 
 [1.Summary](#summary)
 [2.Unity Version](#unity-version)
-[3.Example of use](#example-of-use)
-[4.Features](#features)
+[3.Features](#features)
+[4.Example of use](#example-of-use)
 [5.Example of Command Definition](#example-of-command-definition)
 [6.Configuration](#configuration)
 [7.Slide in and out transition for terminal](#slide-in-and-out-transition-for-terminal)
 [8.javascript](#javascript)
+
+---
 
 ## /Summary
 
@@ -23,11 +25,27 @@ u-Terminal is like a terminal in Unix, a console in Windows, and a console windo
 
 Provides a REPL environment for receiving user input and outputting results.
 
+---
+
 ## /Unity Version
 
 2018.4.27f1 and later
 2019.4.10f1 and later
 2020.1.6f1 and later
+
+---
+
+## /Features
+
+* Asynchronous command support
+* Subcommand support
+* Autocomplete command
+* Automatically generate help
+* Text color support
+* Mobile support(ios, android)
+* Various styles and palettes
+
+---
 
 ## /Example of use
 
@@ -43,15 +61,7 @@ scene --list
 version
 ```
 
-## /Features
-
-* Asynchronous command support
-* Subcommand support
-* Autocomplete command
-* Automatically generate help
-* Text color support
-* Mobile support(ios, android)
-* Various styles and palettes
+---
 
 ## /Example of Command Definition
 
@@ -85,6 +95,8 @@ Base usage
 
 <img id="body-img" src="./assets/images/restart-command.gif" alt="restart-command" />
 
+---
+
 ## /Configuration
 
 Register field information to be used as configuration
@@ -111,11 +123,15 @@ How to use configurations in a terminal
 
 <img id="body-img" src="./assets/images/config-command.gif" alt="config-command" />
 
+---
+
 ## /Slide in and out transition for terminal
 
 default key : ctrl + `
 
 <img id="body-img" src="./assets/images/visible-controller.gif" alt="visible-controller" />
+
+---
 
 ## /javascript
 

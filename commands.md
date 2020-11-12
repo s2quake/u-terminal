@@ -1,8 +1,8 @@
 ---
 layout: page
-permalink: /docs
-permalink_name: /docs
-title: Document
+permalink: /commands
+permalink_name: /commands
+title: Commands
 detail_image: assets/images/docs-logo.png
 ---
 
@@ -13,6 +13,10 @@ detail_image: assets/images/docs-logo.png
 [3.Property definitions](#property-definitions)
 [4.Command enabled or disabled](#command-enabled-or-disabled)
 [5.Autocomplete](#autocomplete)
+[6.Register command](#register-command)
+[7.Register configuration](#register-configuration)
+
+---
 
 ## /Naming convention
 
@@ -34,6 +38,8 @@ Kebab case
 * string Filter -> 'filter'
 * bool IsRecursive -> 'is-recursive'
 * int ExitCode -> 'exit-code'
+
+---
 
 ## /Base definitions
 
@@ -129,6 +135,8 @@ base-sub method2 value v1 v2 v3 --property-value p
 base-sub method3 value
 ```
 
+---
+
 ## /Property definitions
 
 ### 1. CommandPropertyAttribute
@@ -186,6 +194,8 @@ public bool Value { get; set; }
 public string[] Values { get; set; }
 ```
 
+---
+
 ## /Command enabled or disabled
 
 ### 1. Command
@@ -223,6 +233,8 @@ public class BaseSubCommand : TerminalCommandMethodBase
      public bool CanMethod2 => true;
 }
 ```
+
+---
 
 ## /Autocomplete
 
@@ -278,6 +290,126 @@ public class BaseSubCommand : TerminalCommandMethodBase
     public string[] CompleteMethod1(CommandMemberDescriptor descriptor, string find)
     {
         ...
+    }
+}
+```
+
+---
+
+## /Register command
+
+Add the CommandSystem component to a terminal object with the CommandContextHost component.
+
+```cs
+public class CommandSystem : CommandSystemBase
+{
+    protected override IEnumerable<ICommand> OnCommandProvide(ITerminal terminal)
+    {
+        yield return new BaseCommand(terminal);
+    }
+}
+```
+---
+
+## /Register configuration
+
+You can specify values through the config command in the terminal by registering fields and properties.
+
+### 1. Command configuration
+
+```cs
+public class CommandSystem : CommandSystemBase
+{
+    protected override void Awake()
+    {
+        base.Awake();
+        AddConfig(new CommandConfiguration<bool>("sound.pause", (o) => AudioListener.pause, (o, v) => AudioListener.pause = v));
+        AddConfig(new CommandConfiguration<float>("sound.volume", (o) => AudioListener.volume, (o, v) => AudioListener.volume = v));
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        RemoveConfig("sound.pause");
+        RemoveConfig("sound.volume");
+    }
+}
+```
+
+### 2. Field or Property configuration
+
+```cs
+public class TestConfiguration : MonoBehaviour
+{
+    [SerializeField]
+    private float value = 0;
+    [SerializeField]
+    private CommandSystem commandSystem = null;
+
+    public bool IsValue { get; set; }
+
+    private void Awake()
+    {
+        if (this.commandSystem != null)
+        {
+            this.commandSystem.AddConfig(new FieldConfiguration("test.value", this, nameof(value)));
+            this.commandSystem.AddConfig(new PropertyConfiguration("test.IsValue", this, nameof(IsValue)));
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (this.commandSystem != null)
+        {
+            this.commandSystem.RemoveConfig("test.value");
+            this.commandSystem.RemoveConfig("test.IsValue");
+        }
+    }
+}
+```
+
+## 3. Instance configuration
+
+You can use the CommandConfigurationAttribute to register multiple configurations at once.
+
+```cs
+[CommandConfiguration("test")]
+public class TestController : MonoBehaviour
+{
+    public CommandSystem commandSystem = null;
+
+    [Range(0, 10)]
+    [Tooltip("integer value")]
+    [CommandConfiguration]
+    public int value = 0;
+
+    private TestSettings settings;
+
+    private void Awake()
+    {
+        this.settings = new TestSettings();
+        if (this.commandSystem != null)
+        {
+            this.commandSystem.AddConfigs(this);
+            this.commandSystem.AddConfigs(this.settings, "settings");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (this.commandSystem != null)
+        {
+            this.commandSystem.RemoveConfigs(this);
+            this.commandSystem.RemoveConfigs(this.settings, "settings");
+        }
+        this.settings = null;
+    }
+
+    [CommandConfiguration]
+    public class TestSettings
+    {
+        [CommandConfiguration]
+        public int value = 0;
     }
 }
 ```
