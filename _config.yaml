@@ -18,7 +18,7 @@ highlighter: rouge
 
 header_pages:
   - index.md
-  - components.md
+  - usage.md
   - commands.md
   - media.md
   - about.md

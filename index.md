@@ -14,10 +14,10 @@ detail_image: assets/images/logo.png
 [4.Example of use](#example-of-use)
 [5.Example of Command Definition](#example-of-command-definition)
 [6.Configuration](#configuration)
-[7.Slide in and out transition for terminal](#slide-in-and-out-transition-for-terminal)
+[7.Sliding controller](#sliding-controller)
 [8.javascript](#javascript)
 
----
+***
 
 ## /Summary
 
@@ -25,7 +25,7 @@ u-Terminal is like a terminal in Unix, a console in Windows, and a console windo
 
 Provides a REPL environment for receiving user input and outputting results.
 
----
+***
 
 ## /Unity Version
 
@@ -33,7 +33,7 @@ Provides a REPL environment for receiving user input and outputting results.
 2019.4.10f1 and later
 2020.1.6f1 and later
 
----
+***
 
 ## /Features
 
@@ -45,7 +45,7 @@ Provides a REPL environment for receiving user input and outputting results.
 * Mobile support(ios, android)
 * Various styles and palettes
 
----
+***
 
 ## /Example of use
 
@@ -61,7 +61,7 @@ scene --list
 version
 ```
 
----
+***
 
 ## /Example of Command Definition
 
@@ -95,7 +95,7 @@ Base usage
 
 <img id="body-img" src="./assets/images/restart-command.gif" alt="restart-command" />
 
----
+***
 
 ## /Configuration
 
@@ -123,15 +123,15 @@ How to use configurations in a terminal
 
 <img id="body-img" src="./assets/images/config-command.gif" alt="config-command" />
 
----
+***
 
-## /Slide in and out transition for terminal
+## /Sliding controller
 
 default key : ctrl + `
 
-<img id="body-img" src="./assets/images/visible-controller.gif" alt="visible-controller" />
+<img id="body-img" src="./assets/images/sliding-controller.gif" alt="sliding-controller" />
 
----
+***
 
 ## /javascript
 

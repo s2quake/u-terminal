@@ -10,13 +10,14 @@ detail_image: assets/images/docs-logo.png
 
 [1.Naming convention](#naming-convention)
 [2.Base definitions](#base-definitions)
-[3.Property definitions](#property-definitions)
-[4.Command enabled or disabled](#command-enabled-or-disabled)
-[5.Autocomplete](#autocomplete)
-[6.Register command](#register-command)
-[7.Register configuration](#register-configuration)
+[3.String output & progress](#string-output-and-progress)
+[4.Property definitions](#property-definitions)
+[5.Command enabled or disabled](#command-enabled-or-disabled)
+[6.Autocomplete](#autocomplete)
+[7.Register command](#register-command)
+[8.Register configuration](#register-configuration)
 
----
+***
 
 ## /Naming convention
 
@@ -39,7 +40,7 @@ Kebab case
 * bool IsRecursive -> 'is-recursive'
 * int ExitCode -> 'exit-code'
 
----
+***
 
 ## /Base definitions
 
@@ -71,7 +72,7 @@ public class BaseCommand : TerminalCommandBase
 }
 ```
 
-```
+```bash
 base value --option-value v --switch-value value1 value2 value3
 ```
 
@@ -93,11 +94,12 @@ class BaseAsyncCommand : TerminalCommandAsyncBase
 }
 ```
 
-```
+```bash
 base-async --value1 v
 ```
 
 ### 3. base sub command
+
 ```cs
 public class BaseSubCommand : TerminalCommandMethodBase
 {
@@ -129,13 +131,93 @@ public class BaseSubCommand : TerminalCommandMethodBase
     }
 ```
 
-```
+```bash
 base-sub method1 value
 base-sub method2 value v1 v2 v3 --property-value p
 base-sub method3 value
 ```
 
----
+***
+
+## /String output and progress
+
+### 1. Write string
+
+WriteLineAsync must be used in asynchronous methods.
+
+```cs
+...
+    protected override void OnExecute()
+    {
+        this.WriteLine("tex");
+        this.WriteLine("foreground color", TerminalColor.Red);
+}
+...
+
+...
+    protected override async Task OnExecuteAsync(CancellationToken cancellation)
+    {
+        await this.WriteLineAsync("tex");
+        await this.WriteLineAsync("foreground and background color", TerminalColor.Red, TerminalColor.White);
+    }
+...
+```
+
+### 2. Write many strings
+
+Writing many strings one by one can slow down the speed, so using StringBuilder is a good idea to write them all at once.
+
+```cs
+...
+    protected override void OnExecute()
+    {
+        var sb = new StringBuilder();
+        for (var i = 0; i < 1000; i++)
+        {
+            sb.AppendLine($"index: {i}");
+        }
+        this.Write(sb.ToString());
+    }
+...
+```
+
+### 3. Dispatcher.InvokeAsync
+
+You can invoke the method from the main thread using the dispatcher in an asynchronous method.
+
+```cs
+...
+    protected override async Task OnExecuteAsync(CancellationToken cancellation)
+    {
+        this.Dispatcher.InvokeAsync(() => Debug.Log("log"));
+    }
+...
+```
+
+### 4. Progress
+
+<img id="body-img" src="./assets/images/progress.gif" alt="progress" />
+
+```cs
+...
+    protected override async Task OnExecuteAsync(CancellationToken cancellation)
+    {
+        await this.WriteLineAsync("Start Loading.", TerminalColor.Red);
+        for (var i = 0; i < 100; i++)
+        {
+            if (cancellation.IsCancellationRequested == true)
+            {
+                throw new Exception("Loading canceled.");
+            }
+            await this.SetProgressAsync($"{i}%", (float)i / 100);
+        }
+        await this.SetProgressAsync($"{100}%", 1.0f);
+        await this.CompleteProgressAsync("Completed");
+    }
+...
+```
+
+***
 
 ## /Property definitions
 
@@ -194,7 +276,7 @@ public bool Value { get; set; }
 public string[] Values { get; set; }
 ```
 
----
+***
 
 ## /Command enabled or disabled
 
@@ -206,14 +288,14 @@ Override IsEnabled Property
 public class BaseCommand : TerminalCommandBase
 {
     ...
-    public override bool IsEnabled => base.IsEnabled;
+    public override bool IsEnabled => true;
     ...
 }
 ```
 
 ### 2. SubCommand
 
-Use properties in Can + "name" format
+Use property in Can + "name" format
 
 ```cs
 public class BaseSubCommand : TerminalCommandMethodBase
@@ -234,7 +316,7 @@ public class BaseSubCommand : TerminalCommandMethodBase
 }
 ```
 
----
+***
 
 ## /Autocomplete
 
@@ -294,7 +376,7 @@ public class BaseSubCommand : TerminalCommandMethodBase
 }
 ```
 
----
+***
 
 ## /Register command
 
@@ -309,13 +391,15 @@ public class CommandSystem : CommandSystemBase
     }
 }
 ```
----
+***
 
 ## /Register configuration
 
 You can specify values through the config command in the terminal by registering fields and properties.
 
 ### 1. Command configuration
+
+To register a static field or property
 
 ```cs
 public class CommandSystem : CommandSystemBase
@@ -337,6 +421,8 @@ public class CommandSystem : CommandSystemBase
 ```
 
 ### 2. Field or Property configuration
+
+To register fields or properties for a specific instance
 
 ```cs
 public class TestConfiguration : MonoBehaviour
@@ -412,4 +498,26 @@ public class TestController : MonoBehaviour
         public int value = 0;
     }
 }
+```
+
+## 4. Usage in terminal
+
+Show list of configurations
+```bash
+config --list
+```
+
+Show value of 'test.value' configuration
+```bash
+config test.value
+```
+
+Set value of 'test.value' configuration
+```bash
+config test.value 0
+```
+
+Reset value of 'test.value' configuration
+```bash
+config test.value --reset
 ```
