@@ -1,13 +1,13 @@
 # Table of contents
 
-[1.Summary](#summary)
-[2.Unity Version](#unity-version)
-[3.Features](#features)
-[4.Example of use](#example-of-use)
-[5.Example of Command Definition](#example-of-command-definition)
-[6.Configuration](#configuration)
-[7.Sliding controller](#sliding-controller)
-[8.javascript](#javascript)
+[1.Summary](#summary)<br>
+[2.Unity Version](#unity-version)<br>
+[3.Features](#features)<br>
+[4.Example of use](#example-of-use)<br>
+[5.Example of Command Definition](#example-of-command-definition)<br>
+[6.Configuration](#configuration)<br>
+[7.Sliding controller](#sliding-controller)<br>
+[8.javascript](#javascript)<br>
 
 ***
 
