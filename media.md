@@ -10,6 +10,7 @@ title: Media
 [1.Lost Crypt](#lost-crypt)
 [2.FPS-Microgame](#fps-microgame)
 [3.The-Explorer](#the-explorer)
+[4.Creator Kit FPS](#creator-kit-fps)
 
 ## Lost Crypt
 
@@ -27,4 +28,10 @@ title: Media
 
 <div class="video-container">
     <iframe width="100%" src="https://www.youtube.com/embed/FjJIh6rlAEo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+## Creator Kit FPS
+
+<div class="video-container">
+    <iframe width="100%" src="https://www.youtube.com/embed/WfIfXELOfYg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
