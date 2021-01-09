@@ -9,7 +9,8 @@ detail_image: assets/images/logo.png
 # Asset Store
 
 [u-terminal (source code included)](http://u3d.as/2aP4)
-[u-terminal free (assembly version)](http://u3d.as/2isF)
+
+<!-- [u-terminal free (assembly version)](http://u3d.as/2isF) -->
 # Table of contents
 
 [1.Summary](#summary)
